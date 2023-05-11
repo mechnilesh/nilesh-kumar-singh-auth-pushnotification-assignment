@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757106633487",
+    "project_id": "salontime-63763",
+    "storage_bucket": "salontime-63763.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757106633487:android:3054a389862f74f5cf6c7a",
+        "android_client_info": {
+          "package_name": "com.mnapps.salontime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757106633487-qqhcqklngldkkkufr0gu2bcbe0hldl1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDt4mcYR8qtEul79orHEDKAhTQ-l9W1ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757106633487-qqhcqklngldkkkufr0gu2bcbe0hldl1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
