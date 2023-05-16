@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 
 import '../../resources/constants/colors.dart';
 import '../text_form_widget.dart';
@@ -37,21 +39,41 @@ class MyBottomSheetState extends State<MyBottomSheet> {
               ),
             ),
             const SizedBox(height: 20),
-            // TextFormFieldWidget(hintText: "For eg. Beard Trim, Hair Cut etc.."),
-            // const SizedBox(height: 20),
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: TextFormFieldWidget(hintText: "Price"),
-            //     ),
-            //     const SizedBox(width: 15),
-            //     Expanded(
-            //       child: TextFormFieldWidget(hintText: "for eg. 15 minutes"),
-            //     ),
-            //   ],
-            // ),
-            // const SizedBox(height: 20),
-            // TextFormFieldWidget(hintText: "Description"),
+            TextFormFieldWidget(
+              hintText: "For eg. Beard Trim, Hair Cut etc..",
+              textEditingController: context
+                  .read<ShopRegisterVeiwModel>()
+                  .serviceNameEditingController,
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormFieldWidget(
+                    hintText: "Price",
+                    textEditingController: context
+                        .read<ShopRegisterVeiwModel>()
+                        .servicePriceEditingController,
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Expanded(
+                  child: TextFormFieldWidget(
+                    hintText: "for eg. 15 minutes",
+                    textEditingController: context
+                        .read<ShopRegisterVeiwModel>()
+                        .serviceDurationEditingController,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            TextFormFieldWidget(
+              hintText: "Description",
+              textEditingController: context
+                  .read<ShopRegisterVeiwModel>()
+                  .serviceDescriptionEditingController,
+            ),
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {

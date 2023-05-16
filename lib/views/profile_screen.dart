@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/resources/constants/colors.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/register_new_seller.dart';
@@ -45,14 +46,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "Nilesh Kumar Singh",
+                            globalUserDataModel!.name,
                             style: TextStyle(
                               color: whiteColor,
                               fontSize: 16,
                             ),
                           ),
                           Text(
-                            "nilesh.contact.work@gmail.com",
+                            globalUserDataModel!.email,
                             style: TextStyle(
                               color: whiteColor,
                               fontSize: 12,
@@ -68,29 +69,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              ListTile(
-                tileColor: whiteColor,
-                trailing: Switch(
-                  inactiveTrackColor: Colors.grey[200],
-                  activeColor: Color.fromARGB(255, 100, 225, 104),
-                  value: isSeller,
-                  onChanged: (value) {
-                    setState(() {
-                      isSeller = value;
-                    });
-                    if (value == true) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (ctx) =>
-                                const SellerBottomBarPage(index: 2),
-                          ),
-                          (route) => false);
-                    }
-                  },
-                ),
-                title: const Text("Seller Mode"),
-              ),
+              globalUserDataModel!.isSeller
+                  ? ListTile(
+                      tileColor: whiteColor,
+                      trailing: Switch(
+                        inactiveTrackColor: Colors.grey[200],
+                        activeColor: const Color.fromARGB(255, 100, 225, 104),
+                        value: isSeller,
+                        onChanged: (value) {
+                          setState(() {
+                            isSeller = value;
+                          });
+                          if (value == true) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (ctx) =>
+                                      const SellerBottomBarPage(index: 2),
+                                ),
+                                (route) => false);
+                          }
+                        },
+                      ),
+                      title: const Text("Seller Mode"),
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 20),
               ListTile(
                 tileColor: whiteColor,
@@ -159,27 +162,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 title: const Text("Invite Friends"),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (ctx) => const RegisterNewSeller(),
+              globalUserDataModel!.isSeller
+                  ? SizedBox()
+                  : ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (ctx) => const RegisterNewSeller(),
+                          ),
+                        );
+                      },
+                      tileColor: whiteColor,
+                      leading: Icon(
+                        Icons.business_center_outlined,
+                        color: lightPurpleColor,
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: lightPurpleColor,
+                        size: 18,
+                      ),
+                      title: const Text("Register Your Salon"),
                     ),
-                  );
-                },
-                tileColor: whiteColor,
-                leading: Icon(
-                  Icons.business_center_outlined,
-                  color: lightPurpleColor,
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: lightPurpleColor,
-                  size: 18,
-                ),
-                title: const Text("Register Your Salon"),
-              ),
               const SizedBox(height: 20),
               ListTile(
                 onTap: () {

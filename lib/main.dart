@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
+import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 import 'package:shalontime/views/indroduction_views/indroduction_screen.dart';
 
 void main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       key: key,
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => ShopRegisterVeiwModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
               ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
         ),
         title: 'Salon Time',
-        home: const IndroductionSliderScreen(),
+        home: const AuthStateCheckScreen(),
       ),
     );
   }

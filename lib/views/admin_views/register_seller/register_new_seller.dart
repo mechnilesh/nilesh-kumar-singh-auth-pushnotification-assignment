@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shalontime/resources/constants/colors.dart';
+import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/register_screen_step_two.dart';
 
 import '../../../widgets/text_form_widget.dart';
@@ -64,26 +66,56 @@ class _RegisterNewSellerState extends State<RegisterNewSeller> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      // TextFormFieldWidget(hintText: "Salon's Name"),
-                      // const SizedBox(height: 10),
-                      // TextFormFieldWidget(hintText: "GST Number (Optional)"),
-                      // const SizedBox(height: 10),
-                      // TextFormFieldWidget(hintText: "Salon's Address"),
-                      // const SizedBox(height: 30),
-                      // Text(
-                      //   "Owner's Details",
-                      //   style: TextStyle(
-                      //     color: primaryColor,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 20),
-                      // TextFormFieldWidget(hintText: "Owner's Full Name"),
-                      // const SizedBox(height: 10),
-                      // TextFormFieldWidget(hintText: "Owner's Mobile"),
-                      // const SizedBox(height: 10),
-                      // TextFormFieldWidget(hintText: "Owner's Email"),
-                      // const SizedBox(height: 40),
+                      TextFormFieldWidget(
+                        hintText: "Salon's Name",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .shopNameEditingController              ,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormFieldWidget(
+                        hintText: "GST Number (Optional)",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .gstNumberEditingController,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormFieldWidget(
+                        hintText: "Salon's Address",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .shopAddressEditingController,
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        "Owner's Details",
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormFieldWidget(
+                        hintText: "Owner's Full Name",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .ownerNameEditingController,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormFieldWidget(
+                        hintText: "Owner's Mobile",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .ownerMobileEditingController,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormFieldWidget(
+                        hintText: "Owner's Email",
+                        textEditingController: context
+                            .read<ShopRegisterVeiwModel>()
+                            .ownerEmailIdEditingController,
+                      ),
+                      const SizedBox(height: 40),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
