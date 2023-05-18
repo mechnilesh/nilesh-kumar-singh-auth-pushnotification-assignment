@@ -39,6 +39,9 @@ dependencies:
   google_maps_flutter: ^2.2.5
   # flutter_polyline_points: ^1.0.0
   location: ^4.4.0
+  geolocator: ^9.0.2
+  lottie: ^2.3.2
+  geocoding: ^2.1.0
   firebase_core: ^2.11.0
   firebase_auth: ^4.2.2
   cloud_firestore: ^4.6.0
@@ -74,6 +77,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/map/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

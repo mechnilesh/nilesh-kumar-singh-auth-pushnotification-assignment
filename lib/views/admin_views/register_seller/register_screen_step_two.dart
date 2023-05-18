@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 import 'package:shalontime/views/bottom_bar.dart';
 import '../../../resources/constants/colors.dart';
 import '../../../widgets/seller_widgets/bottom_sheet_widget.dart';
@@ -103,12 +105,16 @@ class _RegisterNewSellerStepTwoState extends State<RegisterNewSellerStepTwo> {
                           height: MediaQuery.of(context).size.height * 0.1),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (ctx) => const BottomBarPage(index: 2),
-                              ),
-                              (route) => false);
+                          context
+                              .read<ShopRegisterVeiwModel>()
+                              .submitSellerForm();
+                          // print("submitted");
+                          // Navigator.pushAndRemoveUntil(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (ctx) => const BottomBarPage(index: 2),
+                          //     ),
+                          //     (route) => false);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primaryColor,

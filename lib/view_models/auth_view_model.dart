@@ -131,6 +131,7 @@ class AuthViewModel with ChangeNotifier {
       token: fcmToken,
       uid: userCredential.user!.uid,
       isSeller: false,
+      registrationStatus: false,
     );
 
     await users

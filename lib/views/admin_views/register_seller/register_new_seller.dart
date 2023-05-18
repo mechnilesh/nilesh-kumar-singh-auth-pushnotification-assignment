@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:shalontime/view_models/seller_side_view_models/shop_register_vie
 import 'package:shalontime/views/admin_views/register_seller/register_screen_step_two.dart';
 
 import '../../../widgets/text_form_widget.dart';
+import '../../map_view/map_screen.dart';
 
 class RegisterNewSeller extends StatefulWidget {
   const RegisterNewSeller({super.key});
@@ -70,7 +70,7 @@ class _RegisterNewSellerState extends State<RegisterNewSeller> {
                         hintText: "Salon's Name",
                         textEditingController: context
                             .read<ShopRegisterVeiwModel>()
-                            .shopNameEditingController              ,
+                            .salonNameEditingController,
                       ),
                       const SizedBox(height: 10),
                       TextFormFieldWidget(
@@ -80,12 +80,74 @@ class _RegisterNewSellerState extends State<RegisterNewSeller> {
                             .gstNumberEditingController,
                       ),
                       const SizedBox(height: 10),
-                      TextFormFieldWidget(
-                        hintText: "Salon's Address",
-                        textEditingController: context
+                      // TextFormFieldWidget(
+                      //   hintText: "Salon's Address",
+                      //   textEditingController: context
+                      //       .read<ShopRegisterVeiwModel>()
+                      //       .salonAddressEditingController,
+                      // ),
+                      //-------------------------------
+                      TextFormField(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (ctx) => const MapScreen(),
+                            ),
+                          );
+                        },
+                        readOnly: true,
+                        controller: context
                             .read<ShopRegisterVeiwModel>()
-                            .shopAddressEditingController,
+                            .salonAddressEditingController,
+                        decoration: InputDecoration(
+                          errorStyle: TextStyle(color: primaryColor),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (ctx) => const MapScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.add_location_outlined),
+                          ),
+                          hintText: "Salon's Address",
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: primaryColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.1),
+                              width: 1.0,
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey.withOpacity(0.1),
+                              width: 1.0,
+                            ),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0,
+                            horizontal: 16.0,
+                          ),
+                        ),
                       ),
+
+                      //----------------------------------
                       const SizedBox(height: 30),
                       Text(
                         "Owner's Details",

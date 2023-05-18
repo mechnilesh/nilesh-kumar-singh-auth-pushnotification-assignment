@@ -163,28 +163,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: const Text("Invite Friends"),
               ),
               globalUserDataModel!.isSeller
-                  ? SizedBox()
-                  : ListTile(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (ctx) => const RegisterNewSeller(),
+                  ? const SizedBox()
+                  : globalUserDataModel!.registrationStatus == true
+                      ? ListTile(
+                          onTap: () {},
+                          tileColor: orangeColor.withOpacity(0.7),
+                          title: Text(
+                            "Your salon registration will be completed after verification. Thank you for your patience.",
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontSize: 14,
+                            ),
                           ),
-                        );
-                      },
-                      tileColor: whiteColor,
-                      leading: Icon(
-                        Icons.business_center_outlined,
-                        color: lightPurpleColor,
-                      ),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: lightPurpleColor,
-                        size: 18,
-                      ),
-                      title: const Text("Register Your Salon"),
-                    ),
+                        )
+                      : ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => const RegisterNewSeller(),
+                              ),
+                            );
+                          },
+                          tileColor: whiteColor,
+                          leading: Icon(
+                            Icons.business_center_outlined,
+                            color: lightPurpleColor,
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: lightPurpleColor,
+                            size: 18,
+                          ),
+                          title: const Text("Register Your Salon"),
+                        ),
               const SizedBox(height: 20),
               ListTile(
                 onTap: () {

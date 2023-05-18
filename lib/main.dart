@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
+import 'package:shalontime/view_models/map_view_model.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 import 'package:shalontime/views/indroduction_views/indroduction_screen.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => ShopRegisterVeiwModel()),
+        ChangeNotifierProvider(create: (_) => MapViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

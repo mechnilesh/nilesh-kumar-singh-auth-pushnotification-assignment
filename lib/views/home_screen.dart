@@ -4,6 +4,7 @@ import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/resources/constants/colors.dart';
 import 'package:shalontime/views/map_view/map_screen.dart';
 import '../view_models/auth_view_model.dart';
+import '../view_models/map_view_model.dart';
 import '../widgets/small_sallon_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     context.read<AuthViewModel>().getCurrentUserData();
+    context.read<MapViewModel>().getCurrentLocation();
     super.initState();
   }
 
@@ -88,12 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (ctx) => const MapScreen(),
-                                  ),
-                                );
+                        
                               },
                               child: Row(
                                 children: [
