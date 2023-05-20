@@ -1,11 +1,13 @@
 import 'dart:convert';
 
-class ServiceModel {
+// ServicesModel? globalServicesModel;
+
+class ServicesModel {
   final String serviceName;
   final String servicePrice;
   final String serviceDuration;
   final String serviceDescription;
-  ServiceModel({
+  ServicesModel({
     required this.serviceName,
     required this.servicePrice,
     required this.serviceDuration,
@@ -21,8 +23,8 @@ class ServiceModel {
     };
   }
 
-  factory ServiceModel.fromMap(Map<String, dynamic> map) {
-    return ServiceModel(
+  factory ServicesModel.fromMap(Map<String, dynamic> map) {
+    return ServicesModel(
       serviceName: map['serviceName'] as String,
       servicePrice: map['servicePrice'] as String,
       serviceDuration: map['serviceDuration'] as String,
@@ -32,6 +34,6 @@ class ServiceModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ServiceModel.fromJson(String source) =>
-      ServiceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ServicesModel.fromJson(String source) =>
+      ServicesModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

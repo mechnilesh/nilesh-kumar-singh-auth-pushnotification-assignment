@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/models/seller_side_models/service_model.dart';
+import 'package:shalontime/resources/utils/utils.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/register_new_seller.dart';
 
@@ -77,36 +78,67 @@ class MyBottomSheetState extends State<MyBottomSheet> {
                   .serviceDescriptionEditingController,
             ),
             const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                context.read<ShopRegisterVeiwModel>().addService();
-                print(context
-                    .read<ShopRegisterVeiwModel>()
-                    .serviceNameEditingController
-                    .value
-                    .text);
-
-                // Navigator.push(
-                //   context,
-                //   CupertinoPageRoute(
-                //     builder: (ctx) => RegisterNewSellerStepTwo(),
-                //   ),
-                // );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                minimumSize: Size(
-                  MediaQuery.of(context).size.width,
-                  50,
-                ),
-              ),
-              child: const Text(
-                "Add",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ),
+            (context
+                        .watch<ShopRegisterVeiwModel>()
+                        .serviceNameEditingController
+                        .value
+                        .text
+                        .isNotEmpty &&
+                    context
+                        .watch<ShopRegisterVeiwModel>()
+                        .servicePriceEditingController
+                        .value
+                        .text
+                        .isNotEmpty &&
+                    context
+                        .watch<ShopRegisterVeiwModel>()
+                        .serviceDurationEditingController
+                        .value
+                        .text
+                        .isNotEmpty &&
+                    context
+                        .watch<ShopRegisterVeiwModel>()
+                        .serviceDescriptionEditingController
+                        .value
+                        .text
+                        .isNotEmpty)
+                ? ElevatedButton(
+                    onPressed: () {
+                      context.read<ShopRegisterVeiwModel>().addService();
+                      Navigator.pop(context);
+                      Utils.showSnackBar(
+                          context, "Service Added", Colors.green);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      minimumSize: Size(
+                        MediaQuery.of(context).size.width,
+                        50,
+                      ),
+                    ),
+                    child: const Text(
+                      "Add",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor.withOpacity(0.3),
+                      minimumSize: Size(
+                        MediaQuery.of(context).size.width,
+                        50,
+                      ),
+                    ),
+                    child: const Text(
+                      "Add",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
             const SizedBox(height: 40),
           ],
         ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,12 +79,7 @@ class _RegisterNewSellerState extends State<RegisterNewSeller> {
                             .gstNumberEditingController,
                       ),
                       const SizedBox(height: 10),
-                      // TextFormFieldWidget(
-                      //   hintText: "Salon's Address",
-                      //   textEditingController: context
-                      //       .read<ShopRegisterVeiwModel>()
-                      //       .salonAddressEditingController,
-                      // ),
+
                       //-------------------------------
                       TextFormField(
                         onTap: () {
@@ -178,27 +172,74 @@ class _RegisterNewSellerState extends State<RegisterNewSeller> {
                             .ownerEmailIdEditingController,
                       ),
                       const SizedBox(height: 40),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (ctx) => RegisterNewSellerStepTwo(),
+                      (context
+                                  .watch<ShopRegisterVeiwModel>()
+                                  .salonNameEditingController
+                                  .value
+                                  .text
+                                  .isNotEmpty &&
+                              context
+                                  .watch<ShopRegisterVeiwModel>()
+                                  .salonAddressEditingController
+                                  .value
+                                  .text
+                                  .isNotEmpty &&
+                              context
+                                  .watch<ShopRegisterVeiwModel>()
+                                  .ownerNameEditingController
+                                  .value
+                                  .text
+                                  .isNotEmpty &&
+                              context
+                                  .watch<ShopRegisterVeiwModel>()
+                                  .ownerMobileEditingController
+                                  .value
+                                  .text
+                                  .isNotEmpty &&
+                              context
+                                  .watch<ShopRegisterVeiwModel>()
+                                  .ownerEmailIdEditingController
+                                  .value
+                                  .text
+                                  .isNotEmpty)
+                          ? ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (ctx) =>
+                                        RegisterNewSellerStepTwo(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.9,
+                                    50),
+                              ),
+                              child: const Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            )
+                          : ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor.withOpacity(0.4),
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.9,
+                                    50),
+                              ),
+                              child: const Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          minimumSize:
-                              Size(MediaQuery.of(context).size.width * 0.9, 50),
-                        ),
-                        child: const Text(
-                          "Continue",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 80),
                     ],
                   ),

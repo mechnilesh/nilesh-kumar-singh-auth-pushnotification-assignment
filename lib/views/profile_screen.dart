@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:shalontime/resources/constants/colors.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/register_new_seller.dart';
 import 'package:shalontime/views/admin_views/seller_bottom_bar.dart';
+import 'package:shalontime/views/crm_views/crm_salon_verification_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,8 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                // height: MediaQuery.of(context).size.height * 0.1,
+              const SizedBox(
                 height: 110,
               ),
               Container(
@@ -213,6 +214,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   size: 18,
                 ),
                 title: const Text("Log Out"),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (ctx) => const CRMSalonVerificationScreen(),
+                    ),
+                  );
+                },
+                tileColor: whiteColor,
+                leading: Icon(
+                  Icons.admin_panel_settings_outlined,
+                  color: lightPurpleColor,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: lightPurpleColor,
+                  size: 18,
+                ),
+                title: const Text("CRM"),
               ),
             ],
           ),

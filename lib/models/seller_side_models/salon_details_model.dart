@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:shalontime/models/seller_side_models/service_model.dart';
+SalonDetailsModel? globalSalonDetailsModel;
 
-class SellerRegisterModel {
+class SalonDetailsModel {
   final String salonName;
   final String gstNumber;
   final String salonAddress;
@@ -16,10 +16,10 @@ class SellerRegisterModel {
   final String uid;
   final double latitude;
   final double longitude;
-  final FieldValue timestamp;
-  final List<ServicesModel> listOfServices;
+  final Timestamp timestamp;
+  final List<dynamic> listOfServices;
   //----------------------step 2--------------/
-  SellerRegisterModel({
+  SalonDetailsModel({
     required this.salonName,
     required this.gstNumber,
     required this.salonAddress,
@@ -51,31 +51,10 @@ class SellerRegisterModel {
     };
   }
 
-  factory SellerRegisterModel.fromMa(Map<String, dynamic> map) {
-    return SellerRegisterModel(
-      salonName: map['salonName'] as String,
-      gstNumber: map['gstNumber'] as String,
-      salonAddress: map['salonAddress'] as String,
-      ownerName: map['ownerName'] as String,
-      ownerMobile: map['ownerMobile'] as String,
-      ownerEmail: map['ownerEmail'] as String,
-      salonOpenClose: map['salonOpenClose'] as bool,
-      uid: map['uid'] as String,
-      latitude: map['latitude'] as double,
-      longitude: map['longitude'] as double,
-      timestamp: map['timestamp'],
-      listOfServices: List<ServicesModel>.from(
-        (map['listOfServices'] as List<int>).map<ServicesModel>(
-          (x) => ServicesModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-    );
-  }
-
-  factory SellerRegisterModel.fromSnapshot(DocumentSnapshot<dynamic> snapshot) {
+  factory SalonDetailsModel.fromSnapshot(DocumentSnapshot<dynamic> snapshot) {
     // Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
-    return SellerRegisterModel(
+    return SalonDetailsModel(
       salonName: snapshot.data()['salonName'],
       gstNumber: snapshot.data()['gstNumber'],
       salonAddress: snapshot.data()['salonAddress'],
@@ -87,8 +66,7 @@ class SellerRegisterModel {
       latitude: snapshot.data()['latitude'],
       longitude: snapshot.data()['longitude'],
       timestamp: snapshot.data()['timestamp'],
-      listOfServices:
-          List<ServicesModel>.from(snapshot.data()['listOfServices']),
+      listOfServices: snapshot.data()['listOfServices'],
     );
   }
 

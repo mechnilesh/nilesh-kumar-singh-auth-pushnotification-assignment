@@ -24,6 +24,10 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.textEditingController,
+      keyboardType:
+          widget.hintText == "Price" || widget.hintText == "for eg. 15 minutes"
+              ? TextInputType.number
+              : null,
       obscureText:
           widget.hintText == "Password" || widget.hintText == "Confirm Password"
               ? isObsecure

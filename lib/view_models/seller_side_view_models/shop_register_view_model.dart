@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shalontime/models/seller_side_models/seller_register_model.dart';
 import 'package:shalontime/models/seller_side_models/service_model.dart';
 import 'package:shalontime/models/user_model.dart';
+import 'package:shalontime/view_models/auth_view_model.dart';
 
 CollectionReference serviceProviders =
     FirebaseFirestore.instance.collection('serviceProviders');
@@ -47,10 +48,10 @@ class ShopRegisterVeiwModel with ChangeNotifier {
 
   //-----------------------------------adding service to list-----------------//
 
-  List<ServiceModel> serviceModelList = [];
+  List<ServicesModel> serviceModelList = [];
 
   void addService() {
-    ServiceModel serviceModel = ServiceModel(
+    ServicesModel serviceModel = ServicesModel(
       serviceName: serviceNameEditingController.value.text,
       servicePrice: servicePriceEditingController.value.text,
       serviceDuration: serviceDurationEditingController.value.text,
@@ -84,10 +85,15 @@ class ShopRegisterVeiwModel with ChangeNotifier {
         .doc(globalUserDataModel!.uid)
         .set(sellerRegisterModel.toMap())
         .then((value) {
+      users.doc(globalUserDataModel!.uid).update(
+        {'registrationStatus': true},
+      ).catchError((error) {
+        print("$error");
+        reponse = error;
+      });
       isLoding = false;
       reponse = 'success';
       notifyListeners();
-      FieldValue.serverTimestamp();
     }).catchError(
       (error) {
         print("Failed to add user: $error");

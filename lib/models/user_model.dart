@@ -63,6 +63,8 @@ class UserDataModel {
       registrationStatus: snapshot.data()["registrationStatus"],
     );
   }
+
+  
   String toMap() => json.encode(toMap());
 
   factory UserDataModel.fromJson(String source) =>

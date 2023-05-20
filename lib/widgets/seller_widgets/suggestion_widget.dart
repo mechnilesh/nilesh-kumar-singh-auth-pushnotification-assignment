@@ -53,7 +53,7 @@ class SuggestionWidget extends StatelessWidget {
               ),
             ),
             Text(
-              "$price -  $time",
+              "₹$price -  $time mins",
               style: TextStyle(
                 color: Colors.grey[400],
                 fontWeight: FontWeight.bold,

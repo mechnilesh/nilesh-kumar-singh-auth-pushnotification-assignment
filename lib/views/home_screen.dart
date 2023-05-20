@@ -89,9 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             InkWell(
-                              onTap: () {
-                        
-                              },
+                              onTap: () {},
                               child: Row(
                                 children: [
                                   Icon(
@@ -110,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             TextFormField(
                               decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.search),
+                                prefixIcon: const Icon(Icons.search),
                                 hintText: "Find Your Saloon",
                                 hintStyle: TextStyle(
                                   color: Colors.grey[300],
