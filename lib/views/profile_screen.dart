@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/resources/constants/colors.dart';
@@ -97,6 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   : const SizedBox(),
               const SizedBox(height: 20),
               ListTile(
+                onTap: () {},
                 tileColor: whiteColor,
                 leading: Icon(
                   Icons.settings_outlined,

@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shalontime/models/seller_side_models/seller_register_model.dart';
 import 'package:shalontime/models/seller_side_models/service_model.dart';
 import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
+import 'package:shalontime/views/admin_views/register_seller/registration_done_screen.dart';
+
+import '../../views/bottom_bar.dart';
 
 CollectionReference serviceProviders =
     FirebaseFirestore.instance.collection('serviceProviders');
@@ -63,8 +67,10 @@ class ShopRegisterVeiwModel with ChangeNotifier {
 
   //---------------------------Submiting form to firestore--------------------//
 
-  Future<String> submitSellerForm() async {
+  Future<String> submitSellerForm(BuildContext context) async {
     String reponse = 'something went wrong';
+    isLoding = true;
+    notifiListener();
 
     SellerRegisterModel sellerRegisterModel = SellerRegisterModel(
       salonName: salonNameEditingController.value.text,
@@ -86,8 +92,16 @@ class ShopRegisterVeiwModel with ChangeNotifier {
         .set(sellerRegisterModel.toMap())
         .then((value) {
       users.doc(globalUserDataModel!.uid).update(
-        {'registrationStatus': true},
-      ).catchError((error) {
+        {
+          'registrationStatus': true,
+        },
+      ).then((value) {
+        Navigator.of(context).pushAndRemoveUntil(
+            CupertinoPageRoute(
+              builder: (context) => const RegistraionDoneScreen(),
+            ),
+            (Route<dynamic> route) => false);
+      }).catchError((error) {
         print("$error");
         reponse = error;
       });
@@ -100,6 +114,9 @@ class ShopRegisterVeiwModel with ChangeNotifier {
         reponse = error;
       },
     );
+
+    isLoding = false;
+    notifiListener();
 
     return reponse;
   }

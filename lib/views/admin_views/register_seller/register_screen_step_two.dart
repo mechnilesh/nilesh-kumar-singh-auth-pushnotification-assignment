@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/resources/utils/utils.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
@@ -155,33 +156,41 @@ class _RegisterNewSellerStepTwoState extends State<RegisterNewSellerStepTwo> {
                               .watch<ShopRegisterVeiwModel>()
                               .serviceModelList
                               .isNotEmpty
-                          ? ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<ShopRegisterVeiwModel>()
-                                    .submitSellerForm();
-                                // print("submitted");
-                                // Navigator.pushAndRemoveUntil(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (ctx) => const BottomBarPage(index: 2),
-                                //     ),
-                                //     (route) => false);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                minimumSize: Size(
-                                  MediaQuery.of(context).size.width * 0.9,
-                                  50,
-                                ),
-                              ),
-                              child: const Text(
-                                "Submit",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                            )
+                          ? context.watch<ShopRegisterVeiwModel>().isLoding ==
+                                  true
+                              ? Center(
+                                  child: LoadingAnimationWidget.prograssiveDots(
+                                    color: primaryColor,
+                                    size: 60,
+                                  ),
+                                )
+                              : ElevatedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<ShopRegisterVeiwModel>()
+                                        .submitSellerForm(context);
+                                    // print("submitted");
+                                    // Navigator.pushAndRemoveUntil(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (ctx) => const BottomBarPage(index: 2),
+                                    //     ),
+                                    //     (route) => false);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: primaryColor,
+                                    minimumSize: Size(
+                                      MediaQuery.of(context).size.width * 0.9,
+                                      50,
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Submit",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                )
                           : const SizedBox(),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.3)
                     ],
