@@ -15,7 +15,7 @@ class AuthStateCheckScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return BottomBarPage(index: 0);
+            return const BottomBarPage(index: 0);
           } else if (snapshot.hasError) {
             return Center(
               child: Text("${snapshot.error}"),
@@ -24,12 +24,12 @@ class AuthStateCheckScreen extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        return IndroductionScreen();
+        return const IndroductionScreen();
       },
     );
   }

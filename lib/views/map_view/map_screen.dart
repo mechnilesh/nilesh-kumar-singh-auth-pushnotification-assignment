@@ -21,7 +21,7 @@ class MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
   // final Map<String, Marker> _markers = {};
-  String _draggedAddress = "";
+
   late LatLng _draggedLatlng;
 
   @override
@@ -60,11 +60,11 @@ class MapScreenState extends State<MapScreen> {
   //   zoom: 14,
   // );
 
-  static const CameraPosition _goToCamPos = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(25.439510, 81.849297),
-    zoom: 14,
-  );
+  // static const CameraPosition _goToCamPos = CameraPosition(
+  //   bearing: 192.8334901395799,
+  //   target: LatLng(25.439510, 81.849297),
+  //   zoom: 14,
+  // );
 
   // addMarker(String id, LatLng location) {
   //   var marker = Marker(
@@ -146,14 +146,6 @@ class MapScreenState extends State<MapScreen> {
         ],
       ),
       body: _buildBody(),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text(''),
-      //   icon: Icon(
-      //     Icons.gps_fixed,
-      //     color: primaryColor,
-      //   ),
-      // ),
     );
   }
 
@@ -185,35 +177,54 @@ class MapScreenState extends State<MapScreen> {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16.0),
-        child: ElevatedButton(
-          onPressed: () {
-            // address, latitude, longitude of shop
-            context
-                .read<ShopRegisterVeiwModel>()
-                .salonAddressEditingController
-                .text = _draggedAddress;
+        child: context
+                .watch<MapViewModel>()
+                .operatingLocationsList
+                .toString()
+                .toLowerCase()
+                .contains(
+                    context.watch<MapViewModel>().currentAddress.toLowerCase())
+            ? ElevatedButton(
+                onPressed: () {
+                  // address, latitude, longitude of shop
 
-            context.read<ShopRegisterVeiwModel>().latitudeShop =
-                _draggedLatlng.latitude;
+                  context
+                      .read<ShopRegisterVeiwModel>()
+                      .salonAddressEditingController
+                      .text = context.read<MapViewModel>().draggedAddress;
 
-            context.read<ShopRegisterVeiwModel>().longitudeShop =
-                _draggedLatlng.longitude;
+                  context.read<ShopRegisterVeiwModel>().latitudeShop =
+                      _draggedLatlng.latitude;
 
-            context.read<ShopRegisterVeiwModel>().notifiListener();
+                  context.read<ShopRegisterVeiwModel>().longitudeShop =
+                      _draggedLatlng.longitude;
 
-            Navigator.pop(context);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
-            minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 50),
-          ),
-          child: const Text(
-            "Confirm Location",
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-        ),
+                  context.read<ShopRegisterVeiwModel>().notifiListener();
+
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width * 0.9, 50),
+                ),
+                child: const Text(
+                  "Confirm Location",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            : ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width * 0.9, 50),
+                ),
+                onPressed: () {},
+                child: const Text(
+                    "Currently we are not operating at this location"),
+              ),
       ),
     );
   }
@@ -228,7 +239,7 @@ class MapScreenState extends State<MapScreen> {
         ),
         child: Center(
             child: Text(
-          _draggedAddress,
+          context.read<MapViewModel>().draggedAddress,
           style:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
@@ -254,7 +265,9 @@ class MapScreenState extends State<MapScreen> {
       },
       // markers: _markers.values.toSet(),
       onCameraIdle: () {
-        _getAddress(_draggedLatlng);
+        // _getAddress(_draggedLatlng);
+
+        context.read<MapViewModel>().getAddress(_draggedLatlng);
       },
       onCameraMove: (cameraPosition) {
         //this function will trigger when user keep dragging on map
@@ -271,18 +284,5 @@ class MapScreenState extends State<MapScreen> {
         child: Lottie.asset("assets/map/pin.json"),
       ),
     );
-  }
-
-  //get address from dragged pin
-  Future _getAddress(LatLng position) async {
-    //this will list down all address around the position
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    Placemark address = placemarks[0]; // get only first and closest address
-    String addresStr =
-        "${address.street}, ${address.locality}, ${address.administrativeArea}, ${address.country}";
-    setState(() {
-      _draggedAddress = addresStr;
-    });
   }
 }

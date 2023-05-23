@@ -10,6 +10,7 @@ import 'package:shalontime/view_models/auth_view_model.dart';
 import 'package:shalontime/views/home_screen.dart';
 import 'package:shalontime/views/profile_screen.dart';
 
+import '../view_models/map_view_model.dart';
 import 'bookings_screen.dart';
 
 class BottomBarPage extends StatefulWidget {
@@ -24,19 +25,19 @@ class BottomBarPage extends StatefulWidget {
 }
 
 class _BottomBarPageState extends State<BottomBarPage> {
-  final ScrollController _homeController = ScrollController();
   int _selectedIndex = 0;
 
   @override
   void initState() {
     _selectedIndex = widget.index;
+    context.read<MapViewModel>().getCurrentLocation(context);
     super.initState();
   }
 
   final List<Widget> _listViewBody = [
-    HomeScreen(),
-    BookingsScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const BookingsScreen(),
+    const ProfileScreen(),
   ];
 
   @override

@@ -26,7 +26,7 @@ class _RegisterNewSellerStepTwoState extends State<RegisterNewSellerStepTwo> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return MyBottomSheet();
+        return const MyBottomSheet();
       },
     );
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:shalontime/resources/constants/colors.dart';
-
 import '../../bottom_bar.dart';
 
 class RegistraionDoneScreen extends StatelessWidget {

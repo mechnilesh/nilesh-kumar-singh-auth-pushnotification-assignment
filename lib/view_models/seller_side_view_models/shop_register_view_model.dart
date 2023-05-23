@@ -7,7 +7,6 @@ import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/registration_done_screen.dart';
 
-import '../../views/bottom_bar.dart';
 
 CollectionReference serviceProviders =
     FirebaseFirestore.instance.collection('serviceProviders');

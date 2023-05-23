@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/resources/constants/colors.dart';
+import 'package:shalontime/view_models/map_view_model.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
-import 'package:shalontime/views/admin_views/register_seller/register_screen_step_two.dart';
+import 'package:shalontime/views/admin_views/register_seller/register_new_seller_second_screen.dart';
 
 import '../../../widgets/text_form_widget.dart';
 import '../../map_view/map_screen.dart';

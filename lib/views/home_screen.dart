@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/resources/constants/colors.dart';
-import 'package:shalontime/views/map_view/map_screen.dart';
 import '../view_models/auth_view_model.dart';
 import '../view_models/map_view_model.dart';
 import '../widgets/small_sallon_card_widget.dart';
@@ -18,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     context.read<AuthViewModel>().getCurrentUserData();
-    context.read<MapViewModel>().getCurrentLocation();
+
     super.initState();
   }
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shalontime/models/seller_side_models/service_model.dart';
 import 'package:shalontime/resources/utils/utils.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
-import 'package:shalontime/views/admin_views/register_seller/register_new_seller.dart';
+import 'package:shalontime/views/admin_views/register_seller/register_new_seller_first_screen.dart';
 
 import '../../resources/constants/colors.dart';
 import '../text_form_widget.dart';
