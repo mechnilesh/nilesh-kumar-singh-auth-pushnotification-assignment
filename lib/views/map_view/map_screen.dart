@@ -182,8 +182,10 @@ class MapScreenState extends State<MapScreen> {
                 .operatingLocationsList
                 .toString()
                 .toLowerCase()
-                .contains(
-                    context.watch<MapViewModel>().currentAddress.toLowerCase())
+                .contains(context
+                    .watch<MapViewModel>()
+                    .currentCityAndState!
+                    .toLowerCase())
             ? ElevatedButton(
                 onPressed: () {
                   // address, latitude, longitude of shop
@@ -191,7 +193,7 @@ class MapScreenState extends State<MapScreen> {
                   context
                       .read<ShopRegisterVeiwModel>()
                       .salonAddressEditingController
-                      .text = context.read<MapViewModel>().draggedAddress;
+                      .text = context.read<MapViewModel>().draggedAddress!;
 
                   context.read<ShopRegisterVeiwModel>().latitudeShop =
                       _draggedLatlng.latitude;
@@ -239,7 +241,7 @@ class MapScreenState extends State<MapScreen> {
         ),
         child: Center(
             child: Text(
-          context.read<MapViewModel>().draggedAddress,
+          context.read<MapViewModel>().draggedAddress.toString(),
           style:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
@@ -267,7 +269,7 @@ class MapScreenState extends State<MapScreen> {
       onCameraIdle: () {
         // _getAddress(_draggedLatlng);
 
-        context.read<MapViewModel>().getAddress(_draggedLatlng);
+        context.read<MapViewModel>().getAddress(_draggedLatlng,context);
       },
       onCameraMove: (cameraPosition) {
         //this function will trigger when user keep dragging on map

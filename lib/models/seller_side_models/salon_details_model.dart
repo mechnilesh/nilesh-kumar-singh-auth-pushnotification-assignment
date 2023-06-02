@@ -9,6 +9,8 @@ class SalonDetailsModel {
   final String salonName;
   final String gstNumber;
   final String salonAddress;
+  final String salonCity;
+  final String salonState;
   final String ownerName;
   final String ownerMobile;
   final String ownerEmail;
@@ -23,6 +25,8 @@ class SalonDetailsModel {
     required this.salonName,
     required this.gstNumber,
     required this.salonAddress,
+    required this.salonCity,
+    required this.salonState,
     required this.ownerName,
     required this.ownerMobile,
     required this.ownerEmail,
@@ -39,7 +43,9 @@ class SalonDetailsModel {
       'salonName': salonName,
       'gstNumber': gstNumber,
       'salonAddress': salonAddress,
+      'salonCity': salonCity,
       'ownerName': ownerName,
+      'salonState': salonState,
       'ownerMobile': ownerMobile,
       'ownerEmail': ownerEmail,
       'salonOpenClose': salonOpenClose,
@@ -58,6 +64,8 @@ class SalonDetailsModel {
       salonName: snapshot.data()['salonName'],
       gstNumber: snapshot.data()['gstNumber'],
       salonAddress: snapshot.data()['salonAddress'],
+      salonCity: snapshot.data()['salonCity'],
+      salonState: snapshot.data()['salonState'],
       ownerName: snapshot.data()['ownerName'],
       ownerMobile: snapshot.data()['ownerMobile'],
       ownerEmail: snapshot.data()['ownerEmail'],

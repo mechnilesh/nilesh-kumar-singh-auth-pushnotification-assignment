@@ -3,7 +3,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/resources/utils/utils.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
-import 'package:shalontime/views/bottom_bar.dart';
+import 'package:shalontime/views/app_bottom_bar.dart';
 import '../../../resources/constants/colors.dart';
 import '../../../widgets/seller_widgets/bottom_sheet_widget.dart';
 import '../../../widgets/seller_widgets/suggestion_widget.dart';

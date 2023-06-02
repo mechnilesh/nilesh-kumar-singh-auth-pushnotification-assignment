@@ -20,7 +20,7 @@ class Utils {
     return MediaQuery.of(context).size.width;
   }
 
-  //-------------------------------------------------------------------//
+  //--------------------------------------Pop Ups -----------------------------//
   static showDialogUnavalableArea(BuildContext context) async {
     return showDialog<void>(
       context: context,

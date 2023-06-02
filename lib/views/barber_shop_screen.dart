@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shalontime/views/select_service_screen.dart';
 import '../resources/constants/colors.dart';
+import '../view_models/user_side_view_models/home_screen_view_model.dart';
 
 class BarberShopDetailsScreen extends StatefulWidget {
-  const BarberShopDetailsScreen({super.key});
+  const BarberShopDetailsScreen({super.key, required this.index});
+
+  final int index;
 
   @override
   State<BarberShopDetailsScreen> createState() =>
@@ -18,6 +22,15 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
+
+    // print(
+    //   context
+    //       .read<HomeScreenViewModel>()
+    //       .listOfSalons[widget.index]
+    //       .listOfServices[0]['serviceName']
+    //       .toString(),
+    // );
+
     super.initState();
   }
 
@@ -79,7 +92,10 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Venny's Barber",
+                              context
+                                  .watch<HomeScreenViewModel>()
+                                  .listOfSalons[widget.index]
+                                  .salonName,
                               style: TextStyle(
                                 fontSize: 35,
                                 color: Colors.white,
@@ -159,7 +175,10 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                                         ),
                                       ),
                                       Text(
-                                        "Madbrains Technolgy & solutions LLP, UP, India",
+                                        context
+                                            .watch<HomeScreenViewModel>()
+                                            .listOfSalons[widget.index]
+                                            .salonAddress,
                                         style: TextStyle(
                                           color: whiteColor,
                                           fontSize: 12,
@@ -186,7 +205,11 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                           height: 35,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 14,
+                            itemCount: context
+                                .read<HomeScreenViewModel>()
+                                .listOfSalons[widget.index]
+                                .listOfServices
+                                .length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
@@ -195,20 +218,26 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                                     color: whiteColor,
                                     borderRadius: BorderRadius.circular(4),
                                     border: Border.all(
-                                      color: Color.fromARGB(255, 238, 236, 236),
+                                      color: const Color.fromARGB(
+                                          255, 238, 236, 236),
                                     ),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("Hair Cut"),
+                                    child: Text(
+                                      context
+                                          .read<HomeScreenViewModel>()
+                                          .listOfSalons[widget.index]
+                                          .listOfServices[index]['serviceName'],
+                                    ),
                                   ),
                                 ),
                               );
                             },
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Container(
+                        const SizedBox(height: 20),
+                        SizedBox(
                           height: 40,
                           child: TabBar(
                             unselectedLabelColor: Colors.grey,
@@ -216,7 +245,7 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                             indicatorColor: orangeColor,
                             tabs: const [
                               Tab(
-                                text: 'Information  ',
+                                text: 'Information',
                               ),
                               Tab(
                                 text: 'Portfolio',
@@ -234,13 +263,17 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                           child: TabBarView(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
+                                padding: EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                    style: TextStyle(height: 2),
-                                    "In Flutter, a tab bar is a widget that displays a row of tabs, and each tab can contain a separate content or view. Tab bars are commonly used in mobile app UIs to allow users to switch between different sections or pages within the same screen. Here's an example of how to implement a tab bar in Flutter: In Flutter, a tab bar is a widget that displays a row of tabs, and each tab can contain a separate content or view. Tab bars are commonly used in mobile app UIs to allow users to switch between different sections or pages within the same screen. Here's an example of how to implement a tab bar in Flutter:"),
+                                  style: TextStyle(height: 2),
+                                  context
+                                      .watch<HomeScreenViewModel>()
+                                      .listOfSalons[widget.index]
+                                      .salonAddress,
+                                ),
                               ),
-                              Text('Person'),
-                              Text('Person')
+                              Text('Portfolio'),
+                              Text('Review')
                             ],
                             controller: _tabController,
                           ),
@@ -261,7 +294,8 @@ class _BarberShopDetailsScreenState extends State<BarberShopDetailsScreen>
                   Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (ctx) => const SelectServiceScreen(),
+                      builder: (ctx) =>
+                          SelectServiceScreen(index: widget.index),
                     ),
                   );
                 },

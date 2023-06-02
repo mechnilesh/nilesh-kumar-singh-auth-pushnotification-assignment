@@ -9,7 +9,7 @@ import 'package:shalontime/views/home_screen.dart';
 
 import '../../view_models/auth_view_model.dart';
 import '../../widgets/text_form_widget.dart';
-import '../bottom_bar.dart';
+import '../app_bottom_bar.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

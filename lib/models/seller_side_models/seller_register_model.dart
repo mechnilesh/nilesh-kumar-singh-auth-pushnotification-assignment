@@ -9,10 +9,13 @@ class SellerRegisterModel {
   final String salonName;
   final String gstNumber;
   final String salonAddress;
+  final String salonCity;
+  final String salonState;
   final String ownerName;
   final String ownerMobile;
   final String ownerEmail;
   final bool salonOpenClose;
+  final bool isVerfied;
   final String uid;
   final double latitude;
   final double longitude;
@@ -23,10 +26,13 @@ class SellerRegisterModel {
     required this.salonName,
     required this.gstNumber,
     required this.salonAddress,
+    required this.salonCity,
+    required this.salonState,
     required this.ownerName,
     required this.ownerMobile,
     required this.ownerEmail,
     required this.salonOpenClose,
+    required this.isVerfied,
     required this.uid,
     required this.latitude,
     required this.longitude,
@@ -39,6 +45,8 @@ class SellerRegisterModel {
       'salonName': salonName,
       'gstNumber': gstNumber,
       'salonAddress': salonAddress,
+      'salonCity': salonCity,
+      'salonState': salonState,
       'ownerName': ownerName,
       'ownerMobile': ownerMobile,
       'ownerEmail': ownerEmail,
@@ -47,6 +55,7 @@ class SellerRegisterModel {
       'latitude': latitude,
       'longitude': longitude,
       'timestamp': timestamp,
+      'isVerfied': isVerfied,
       'listOfServices': listOfServices.map((x) => x.toMap()).toList(),
     };
   }
@@ -56,10 +65,13 @@ class SellerRegisterModel {
       salonName: map['salonName'] as String,
       gstNumber: map['gstNumber'] as String,
       salonAddress: map['salonAddress'] as String,
+      salonCity: map['salonCity'] as String,
+      salonState: map['salonState'] as String,
       ownerName: map['ownerName'] as String,
       ownerMobile: map['ownerMobile'] as String,
       ownerEmail: map['ownerEmail'] as String,
       salonOpenClose: map['salonOpenClose'] as bool,
+      isVerfied: map['isVerfied'] as bool,
       uid: map['uid'] as String,
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
@@ -76,9 +88,12 @@ class SellerRegisterModel {
     // Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
     return SellerRegisterModel(
+      isVerfied: snapshot.data()['isVerfied'],
       salonName: snapshot.data()['salonName'],
       gstNumber: snapshot.data()['gstNumber'],
       salonAddress: snapshot.data()['salonAddress'],
+      salonCity: snapshot.data()['salonCity'],
+      salonState: snapshot.data()['salonState'],
       ownerName: snapshot.data()['ownerName'],
       ownerMobile: snapshot.data()['ownerMobile'],
       ownerEmail: snapshot.data()['ownerEmail'],

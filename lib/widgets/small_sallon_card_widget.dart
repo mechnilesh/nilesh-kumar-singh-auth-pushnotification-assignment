@@ -1,13 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:shalontime/views/barber_shop_screen.dart';
 
 import '../resources/constants/colors.dart';
 
-class SaloonSmallCard extends StatelessWidget {
-  const SaloonSmallCard({
-    super.key,
-  });
+class SalonSmallCard extends StatelessWidget {
+  const SalonSmallCard({
+    Key? key,
+    required this.salonName,
+    required this.index,
+  }) : super(key: key);
+
+  final String salonName;
+  final int index;
+  // final String distance;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class SaloonSmallCard extends StatelessWidget {
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (ctx) => const BarberShopDetailsScreen(),
+            builder: (ctx) => BarberShopDetailsScreen(index: index),
           ),
         );
       },
@@ -62,8 +70,8 @@ class SaloonSmallCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Vinny's Barber",
-                  style: TextStyle(
+                  salonName,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),

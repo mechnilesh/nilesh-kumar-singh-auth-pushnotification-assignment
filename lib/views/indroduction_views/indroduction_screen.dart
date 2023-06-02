@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shalontime/resources/constants/colors.dart';
-import 'package:shalontime/views/bottom_bar.dart';
+import 'package:shalontime/views/app_bottom_bar.dart';
 
 import '../../widgets/slider_widget.dart';
 
@@ -15,7 +15,7 @@ class AuthStateCheckScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return const BottomBarPage(index: 0);
+            return const AppBottomBarPage(index: 0);
           } else if (snapshot.hasError) {
             return Center(
               child: Text("${snapshot.error}"),

@@ -58,8 +58,12 @@ class CRMSalonViewModel with ChangeNotifier {
 
   void approveSalon(String sellerUid) async {
     await _users.doc(sellerUid).update({"isSeller": true}).then((value) {
-      isSeller = true;
-      notifyListeners();
+      _serviceProviders
+          .doc(sellerUid)
+          .update({"isVerfied": true}).then((value) {
+        isSeller = true;
+        notifyListeners();
+      });
     }).catchError((error) {
       print("$error");
     });
@@ -69,8 +73,12 @@ class CRMSalonViewModel with ChangeNotifier {
     await _users
         .doc(sellerUid)
         .update({"isSeller": false, "registrationStatus": false}).then((value) {
-      registrationStatus = false;
-      notifyListeners();
+      _serviceProviders
+          .doc(sellerUid)
+          .update({"isVerfied": false}).then((value) {
+        registrationStatus = false;
+        notifyListeners();
+      });
     }).catchError((error) {
       print("$error");
     });

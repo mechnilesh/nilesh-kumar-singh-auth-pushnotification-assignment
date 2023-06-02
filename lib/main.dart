@@ -6,6 +6,7 @@ import 'package:shalontime/view_models/auth_view_model.dart';
 import 'package:shalontime/view_models/crm_view_models/crm_salon_view_model.dart';
 import 'package:shalontime/view_models/map_view_model.dart';
 import 'package:shalontime/view_models/seller_side_view_models/shop_register_view_model.dart';
+import 'package:shalontime/view_models/user_side_view_models/home_screen_view_model.dart';
 import 'package:shalontime/views/indroduction_views/indroduction_screen.dart';
 
 void main() async {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ShopRegisterVeiwModel()),
         ChangeNotifierProvider(create: (_) => MapViewModel()),
         ChangeNotifierProvider(create: (_) => CRMSalonViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeScreenViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -4,7 +4,7 @@ import 'package:shalontime/resources/constants/colors.dart';
 import 'package:shalontime/views/admin_views/seller_availability_screen.dart';
 import 'package:shalontime/views/admin_views/seller_bottom_bar.dart';
 import 'package:shalontime/views/admin_views/seller_open_close_shop_screen.dart';
-import 'package:shalontime/views/bottom_bar.dart';
+import 'package:shalontime/views/app_bottom_bar.dart';
 
 class SellerProfileScreen extends StatefulWidget {
   const SellerProfileScreen({super.key});
@@ -144,7 +144,7 @@ class _SellerProfileScreenState extends State<SellerProfileScreen> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (ctx) => const BottomBarPage(index: 2),
+                            builder: (ctx) => const AppBottomBarPage(index: 2),
                           ),
                           (route) => false);
                     }

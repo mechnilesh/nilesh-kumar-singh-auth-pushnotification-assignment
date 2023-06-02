@@ -11,20 +11,21 @@ import 'package:shalontime/views/home_screen.dart';
 import 'package:shalontime/views/profile_screen.dart';
 
 import '../view_models/map_view_model.dart';
+import '../view_models/user_side_view_models/home_screen_view_model.dart';
 import 'bookings_screen.dart';
 
-class BottomBarPage extends StatefulWidget {
-  const BottomBarPage({
+class AppBottomBarPage extends StatefulWidget {
+  const AppBottomBarPage({
     Key? key,
     required this.index,
   }) : super(key: key);
   final int index;
 
   @override
-  State<BottomBarPage> createState() => _BottomBarPageState();
+  State<AppBottomBarPage> createState() => _AppBottomBarPageState();
 }
 
-class _BottomBarPageState extends State<BottomBarPage> {
+class _AppBottomBarPageState extends State<AppBottomBarPage> {
   int _selectedIndex = 0;
 
   @override

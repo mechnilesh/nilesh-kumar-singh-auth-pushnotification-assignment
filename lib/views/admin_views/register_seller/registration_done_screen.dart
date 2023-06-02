@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shalontime/resources/constants/colors.dart';
-import '../../bottom_bar.dart';
+import '../../app_bottom_bar.dart';
 
 class RegistraionDoneScreen extends StatelessWidget {
   const RegistraionDoneScreen({super.key});
@@ -44,7 +44,7 @@ class RegistraionDoneScreen extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushAndRemoveUntil(
                   CupertinoPageRoute(
-                    builder: (context) => const BottomBarPage(index: 0),
+                    builder: (context) => const AppBottomBarPage(index: 0),
                   ),
                   (Route<dynamic> route) => false);
             },

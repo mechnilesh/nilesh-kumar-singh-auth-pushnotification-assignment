@@ -7,7 +7,7 @@ import 'package:shalontime/resources/constants/colors.dart';
 import 'package:shalontime/resources/utils/utils.dart';
 import 'package:shalontime/views/auth_views/login_screen.dart';
 
-import '../views/bottom_bar.dart';
+import '../views/app_bottom_bar.dart';
 
 CollectionReference users = FirebaseFirestore.instance.collection('users');
 String fcmToken = '';
@@ -50,7 +50,7 @@ class AuthViewModel with ChangeNotifier {
         if (context.mounted) {
           Navigator.of(context).pushAndRemoveUntil(
               CupertinoPageRoute(
-                builder: (context) => const BottomBarPage(index: 0),
+                builder: (context) => const AppBottomBarPage(index: 0),
               ),
               (Route<dynamic> route) => false);
         }
@@ -87,7 +87,7 @@ class AuthViewModel with ChangeNotifier {
           notifyListeners();
           Navigator.of(context).pushAndRemoveUntil(
               CupertinoPageRoute(
-                builder: (context) => const BottomBarPage(index: 0),
+                builder: (context) => const AppBottomBarPage(index: 0),
               ),
               (Route<dynamic> route) => false);
         },

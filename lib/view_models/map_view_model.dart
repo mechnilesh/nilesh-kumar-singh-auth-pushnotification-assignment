@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shalontime/resources/utils/utils.dart';
+import 'package:shalontime/view_models/user_side_view_models/home_screen_view_model.dart';
 // import 'package:location/location.dart';
 
 class MapViewModel with ChangeNotifier {
   Position? currentLocation;
-  String draggedAddress = "";
-  String currentAddress = "";
+  String? draggedAddress;
+  String? currentCityAndState;
+  String? city;
+  String? state;
   List<dynamic> operatingLocationsList = [];
   // double lat = 0;
   //-----------------------get current location---------------//
-  void getCurrentLocation(BuildContext context) async {
+  Future<void> getCurrentLocation(BuildContext context) async {
     currentLocation = await _determineUserCurrentPosition();
     print("============ $currentLocation ==============");
     getCurrentLocationAndCheckForAailibilty(context);
@@ -51,7 +55,7 @@ class MapViewModel with ChangeNotifier {
   //----------------------------get address---------------------//
 
   //get address from dragged pin
-  Future getAddress(LatLng position) async {
+  Future getAddress(LatLng position, BuildContext context) async {
     //this will list down all address around the position
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -60,20 +64,25 @@ class MapViewModel with ChangeNotifier {
         "${address.street}, ${address.locality}, ${address.administrativeArea}, ${address.country}";
 
     draggedAddress = addresStr;
-    currentAddress = "${address.locality},${address.administrativeArea}";
+    currentCityAndState = "${address.locality}, ${address.administrativeArea}";
+    city = address.locality!;
+    state = address.administrativeArea!;
 
-    print(currentAddress);
-    print(draggedAddress);
+    print(city);
+    print(state);
 
     notifyListeners();
+
+    context.read<HomeScreenViewModel>().getSalonsNearBy(context, city!, state!);
   }
 
   //--------------get current location and check for availability------------//
 
   void getCurrentLocationAndCheckForAailibilty(BuildContext context) async {
     await getAddress(
-      LatLng(currentLocation!.latitude, currentLocation!.longitude),
-    ).then((value) {
+            LatLng(currentLocation!.latitude, currentLocation!.longitude),
+            context)
+        .then((value) {
       getListOfAvailablePlaces(context);
     });
   }
@@ -91,7 +100,7 @@ class MapViewModel with ChangeNotifier {
       if (operatingLocationsList
           .toString()
           .toLowerCase()
-          .contains(currentAddress.toLowerCase())) {
+          .contains(currentCityAndState!.toLowerCase())) {
         Null;
       } else {
         Utils.showDialogUnavalableArea(context);

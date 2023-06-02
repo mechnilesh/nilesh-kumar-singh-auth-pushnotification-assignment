@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/resources/constants/colors.dart';
+import 'package:shalontime/view_models/user_side_view_models/home_screen_view_model.dart';
 import '../view_models/auth_view_model.dart';
 import '../view_models/map_view_model.dart';
 import '../widgets/small_sallon_card_widget.dart';
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     context.read<AuthViewModel>().getCurrentUserData();
-
+    // context.read<HomeScreenViewModel>().getSalonsNearBy(context);
     super.initState();
   }
 
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextFormField(
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.search),
-                                hintText: "Find Your Saloon",
+                                hintText: "Find Your Salon",
                                 hintStyle: TextStyle(
                                   color: Colors.grey[300],
                                 ),
@@ -158,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16),
                     child: Text(
-                      "Top Saloons",
+                      "Top Salons",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -256,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16),
                     child: Text(
-                      "Saloon Near You",
+                      "Salon Near You",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -276,26 +277,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         physics: const ClampingScrollPhysics(),
+                        itemCount: context
+                            .watch<HomeScreenViewModel>()
+                            .listOfSalons
+                            .length,
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
                               Column(
                                 children: [
-                                  SaloonSmallCard(),
-                                  SizedBox(height: 20),
-                                  SaloonSmallCard(),
+                                  SalonSmallCard(
+                                    salonName: context
+                                        .watch<HomeScreenViewModel>()
+                                        .listOfSalons[index]
+                                        .salonName,
+                                    index: index,
+                                  ),
+                                  // SizedBox(height: 20),
+                                  // SalonSmallCard(salonName: ),
                                 ],
                               ),
                               const SizedBox(width: 20),
                             ],
                           );
                         },
-                        itemCount: 10,
                       ),
                     ),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 5,
                   ),
                 ],
               ),

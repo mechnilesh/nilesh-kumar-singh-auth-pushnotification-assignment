@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shalontime/models/seller_side_models/seller_register_model.dart';
 import 'package:shalontime/models/seller_side_models/service_model.dart';
 import 'package:shalontime/models/user_model.dart';
 import 'package:shalontime/view_models/auth_view_model.dart';
+import 'package:shalontime/view_models/map_view_model.dart';
 import 'package:shalontime/views/admin_views/register_seller/registration_done_screen.dart';
-
 
 CollectionReference serviceProviders =
     FirebaseFirestore.instance.collection('serviceProviders');
@@ -72,6 +73,7 @@ class ShopRegisterVeiwModel with ChangeNotifier {
     notifiListener();
 
     SellerRegisterModel sellerRegisterModel = SellerRegisterModel(
+      isVerfied: false,
       salonName: salonNameEditingController.value.text,
       gstNumber: gstNumberEditingController.value.text,
       salonAddress: salonAddressEditingController.value.text,
@@ -84,6 +86,8 @@ class ShopRegisterVeiwModel with ChangeNotifier {
       latitude: latitudeShop!,
       longitude: longitudeShop!,
       timestamp: FieldValue.serverTimestamp(),
+      salonCity: context.read<MapViewModel>().city.toString(),
+      salonState: context.read<MapViewModel>().state.toString(),
     );
 
     await serviceProviders
